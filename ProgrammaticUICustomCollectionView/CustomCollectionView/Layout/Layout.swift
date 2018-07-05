@@ -10,6 +10,7 @@ import UIKit
 protocol CatFeedDelegate {
     func heightForCell(at indexpath: IndexPath) -> CGFloat
 }
+
 class CatFeedLayout: UICollectionViewLayout {
     var cache = [UICollectionViewLayoutAttributes]()
     var delegate: CatFeedDelegate?
@@ -47,7 +48,7 @@ class CatFeedLayout: UICollectionViewLayout {
             
             // Calculate Attributes
             let xOrigin = columnWidth * (currentColumnFloat)
-            let height = self.delegate!.heightForCell(at: indexPath)
+            guard let height = self.delegate?.heightForCell(at: indexPath) else { return }
             
             var yOrigin = CGFloat()
             if item < numberOfColumns { yOrigin = padding }
@@ -61,7 +62,6 @@ class CatFeedLayout: UICollectionViewLayout {
             if currentColumn < (numberOfColumns - 1) { currentColumn = currentColumn + 1}
             else { currentColumn = 0}
         }
-        for x in cache { print(x) }
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {

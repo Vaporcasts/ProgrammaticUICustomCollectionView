@@ -13,7 +13,7 @@ class ViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        self.view.backgroundColor = UIColor.white
         setupCollectionView()
     }
     
@@ -41,17 +41,15 @@ extension ViewController: CatFeedDelegate {
             if catHeight > catWidth {
                 let ratio = cat.imageSize.height / cat.imageSize.width
                 let finalHeight = imageWidth * ratio
-                print("the final height and width for indexPath \(indexpath.item) are \(finalHeight) and \(imageWidth)")
                 return finalHeight
             } else if catWidth > catHeight {
                 let ratio = cat.imageSize.height / cat.imageSize.width
                 let finalHeight = imageWidth * ratio
-                print("the final height and width for indexPath \(indexpath.item) are \(finalHeight) and \(imageWidth)")
                 return finalHeight
             }
            
         }
-        return 40
+        return 0
     }
 }
 
