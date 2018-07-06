@@ -19,7 +19,7 @@ class CatCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layoutCell(with: frame)
+        layoutCell()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -37,8 +37,7 @@ class CatCell: UICollectionViewCell {
 }
 
 extension CatCell {
-    func layoutCell(with frame: CGRect) {
-        imageView = UIImageView()
+    func layoutCell() {
         imageView.translatesAutoresizingMaskIntoConstraints = false
         self.contentView.addSubview(imageView)
         imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
@@ -46,5 +45,8 @@ extension CatCell {
         imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         imageView.contentMode = .scaleAspectFit
+        
+        imageView.backgroundColor = UIColor.red
+        contentView.backgroundColor = UIColor.blue
     }
 }

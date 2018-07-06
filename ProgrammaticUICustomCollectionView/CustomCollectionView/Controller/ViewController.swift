@@ -10,6 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     var collectionView: CatFeedCollectionView?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +32,8 @@ extension ViewController {
 }
 
 extension ViewController: CatFeedDelegate {
-    func heightForCell(at indexpath: IndexPath) -> CGFloat {
-        let cat = cats[indexpath.item]
+    func heightForCell(at indexPath: IndexPath, in section: Int) -> CGFloat {
+        let cat = catList[indexPath.section].cats[indexPath.item]
         if let collectionView = self.collectionView, let layout = collectionView.collectionViewLayout as? CatFeedLayout {
             let imageWidth = collectionView.frame.width / CGFloat(layout.numberOfColumns)
             
@@ -47,7 +48,6 @@ extension ViewController: CatFeedDelegate {
                 let finalHeight = imageWidth * ratio
                 return finalHeight
             }
-           
         }
         return 0
     }
@@ -60,17 +60,28 @@ extension ViewController: UICollectionViewDelegate {
 
 extension ViewController: UICollectionViewDataSource {
     
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionElementKindSectionHeader {
+            if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as? Header {
+                header.configure(with: catList[indexPath.section].breed)
+                return header
+            }
+        }
+        return Header()
+    }
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1
+        return catList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return cats.count
+        return catList[section].cats.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "catCell", for: indexPath) as? CatCell {
-            cell.setup(with: cats[indexPath.item])
+            let cat = catList[indexPath.section].cats[indexPath.item]
+            cell.setup(with: cat)
             return cell
         }
         return UICollectionViewCell()
