@@ -30,14 +30,22 @@ extension CatFeedLayout {
     
     /// Calculates the Y origin for a given item
     func calculateYOrigin(for item: Int, inSection section: Int) -> CGFloat {
+        // when the item is the top in its section, its yOrigin will just be
+        // the same as the enYdY for the sectionHeader above it
         if itemIsTop(item) { return endYForLatestSectionHeader() }
+        
+        // if the item is in the top row of section 0
         else if item < numberOfColumns && section == 0 {
             return padding + headerHeight
         }
+            
+        // for all other cases where the item is not in the top row
         else if item >= numberOfColumns {
             let cellAbove = cache[cache.count - numberOfColumns]
             return cellAbove.frame.origin.y + cellAbove.frame.height + padding
         }
+        
+        // fallback return
         return 0
     }
     

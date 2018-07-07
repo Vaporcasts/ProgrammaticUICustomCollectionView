@@ -35,7 +35,7 @@ class CatFeedLayout: UICollectionViewLayout {
     override var collectionViewContentSize: CGSize {
         if let collectionView = self.collectionView {
             return CGSize(width: collectionView.frame.width, height: totalHeight)
-        } else { return CGSize(width: 0, height: 0) }
+        } else { return CGSize.zero }
     }
     
     override func prepare() {
@@ -46,7 +46,7 @@ class CatFeedLayout: UICollectionViewLayout {
             cache.append(headerAttributes)
             for item in 0..<collectionView.numberOfItems(inSection: section) {
                 // reset the current column if we are in a new section
-                if item == 0 { currentColumn = 0 }
+                currentColumn = item == 0 ? 0 : currentColumn
                 let currentColumnFloat = CGFloat(currentColumn)
                 
                 let indexPath = IndexPath(item: item, section: section)
