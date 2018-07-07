@@ -12,8 +12,7 @@ extension CatFeedLayout {
     
     /// Tells us whether or not the item is in the top row of its section
     func itemIsTop(_ item: Int) -> Bool {
-        if item < numberOfColumns { return true }
-        return false
+        return item < numberOfColumns
     }
     
     /// Gives us the bottom Y value for the latest section header
