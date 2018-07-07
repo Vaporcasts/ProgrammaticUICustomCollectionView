@@ -9,9 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var collectionView: CatFeedCollectionView?
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
@@ -22,19 +20,21 @@ class ViewController: UIViewController {
 
 extension ViewController {
     func setupCollectionView() {
+        // whether you are using a custom layout of not, if you want to create a UICOllectionview programatically, you must initialize it with a layout.
         let layout = CatFeedLayout()
-        collectionView = CatFeedCollectionView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: self.view.frame.height), collectionViewLayout: layout)
-        collectionView?.delegate = self
-        collectionView?.dataSource = self
+        let yOrigin: CGFloat = 20
+        let collectionView = CatFeedCollectionView(frame: CGRect(x: 0, y: yOrigin, width: self.view.frame.width, height: self.view.frame.height - yOrigin), collectionViewLayout: layout)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         layout.delegate = self
-        if self.collectionView != nil { self.view.addSubview(collectionView!) }
+        self.view.addSubview(collectionView)
     }
 }
 
 extension ViewController: CatFeedDelegate {
-    func heightForCell(at indexPath: IndexPath, in section: Int) -> CGFloat {
+    func heightForCell(at indexPath: IndexPath, in section: Int, forCollectionView collectionView: CatFeedCollectionView) -> CGFloat {
         let cat = catList[indexPath.section].cats[indexPath.item]
-        if let collectionView = self.collectionView, let layout = collectionView.collectionViewLayout as? CatFeedLayout {
+        if let layout = collectionView.collectionViewLayout as? CatFeedLayout {
             let imageWidth = collectionView.frame.width / CGFloat(layout.numberOfColumns)
             
             let catHeight = cat.imageSize.height

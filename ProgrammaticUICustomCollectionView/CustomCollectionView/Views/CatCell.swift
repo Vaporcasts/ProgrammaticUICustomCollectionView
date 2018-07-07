@@ -45,8 +45,5 @@ extension CatCell {
         imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
         imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
         imageView.contentMode = .scaleAspectFit
-        
-        imageView.backgroundColor = UIColor.red
-        contentView.backgroundColor = UIColor.blue
     }
 }

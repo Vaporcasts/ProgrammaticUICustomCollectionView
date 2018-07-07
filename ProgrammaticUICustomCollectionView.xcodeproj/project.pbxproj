@@ -19,6 +19,7 @@
 		F3070D2520EB934700C175F8 /* Header.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3070D2420EB934700C175F8 /* Header.swift */; };
 		F3070D2A20EBA05700C175F8 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = F3070D2920EBA05600C175F8 /* Extensions.swift */; };
 		F35DDFBC20EE6D0C00D2AFE6 /* CatList.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35DDFBB20EE6D0C00D2AFE6 /* CatList.swift */; };
+		F35DDFBE20F06FB400D2AFE6 /* Layout+Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = F35DDFBD20F06FB400D2AFE6 /* Layout+Helpers.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +37,7 @@
 		F3070D2420EB934700C175F8 /* Header.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Header.swift; sourceTree = "<group>"; };
 		F3070D2920EBA05600C175F8 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		F35DDFBB20EE6D0C00D2AFE6 /* CatList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CatList.swift; sourceTree = "<group>"; };
+		F35DDFBD20F06FB400D2AFE6 /* Layout+Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Layout+Helpers.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				F3070D1A20EB8EB600C175F8 /* Layout.swift */,
+				F35DDFBD20F06FB400D2AFE6 /* Layout+Helpers.swift */,
 			);
 			path = Layout;
 			sourceTree = "<group>";
@@ -198,6 +201,7 @@
 				F3070D2520EB934700C175F8 /* Header.swift in Sources */,
 				F3070D2A20EBA05700C175F8 /* Extensions.swift in Sources */,
 				F3070D1F20EB8F9700C175F8 /* CatCell.swift in Sources */,
+				F35DDFBE20F06FB400D2AFE6 /* Layout+Helpers.swift in Sources */,
 				F3070D0820EB8BD100C175F8 /* ViewController.swift in Sources */,
 				F3070D1B20EB8EB600C175F8 /* Layout.swift in Sources */,
 				F3070D1D20EB8F6A00C175F8 /* CatFeedCollectionView.swift in Sources */,

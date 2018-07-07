@@ -10,6 +10,7 @@ import UIKit
 
 class Header: UICollectionReusableView {
     var titleLabel = UILabel()
+    let margin: CGFloat = 8
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -21,6 +22,11 @@ class Header: UICollectionReusableView {
         super.init(coder: aDecoder)
     }
     
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.titleLabel.text = nil
+    }
+    
     func configure(with title: String) {
         titleLabel.text = title
     }
@@ -28,10 +34,9 @@ class Header: UICollectionReusableView {
     func layout() {
         titleLabel.translatesAutoresizingMaskIntoConstraints = false
         addSubview(titleLabel)
-        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: 10)
-        titleLabel.topAnchor.constraint(equalTo: self.topAnchor, constant: 10)
-        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: 10)
-        titleLabel.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: 10)
+        titleLabel.leftAnchor.constraint(equalTo: self.leftAnchor, constant: margin).isActive = true
+        titleLabel.rightAnchor.constraint(equalTo: self.rightAnchor, constant: margin).isActive = true
+        titleLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor).isActive = true
     }
 }
 

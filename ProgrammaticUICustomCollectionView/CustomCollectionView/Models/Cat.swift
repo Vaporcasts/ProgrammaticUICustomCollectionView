@@ -17,8 +17,4 @@ class Cat {
         self.imageUrl = imageUrl
         self.imageSize = imageSize
     }
-    
-    var url: URL? {
-        return URL(string: imageUrl)
-    }
 }
