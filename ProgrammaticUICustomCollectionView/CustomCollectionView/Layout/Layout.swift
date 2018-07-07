@@ -55,7 +55,6 @@ class CatFeedLayout: UICollectionViewLayout {
                 // Calculate Attributes
                 let xOrigin = columnWidth * (currentColumnFloat)
                 let height = self.delegate?.heightForCell(at: indexPath, in: section, forCollectionView: collectionView) ?? 0
-           //     guard let height = self.delegate?.heightForCell(at: indexPath, in: section, forCollectionView: collectionView) else { return }
                 let yOrigin = calculateYOrigin(for: item, inSection: section)
                 
                 attributes.frame = CGRect(x: xOrigin, y: yOrigin, width: columnWidth, height: height)

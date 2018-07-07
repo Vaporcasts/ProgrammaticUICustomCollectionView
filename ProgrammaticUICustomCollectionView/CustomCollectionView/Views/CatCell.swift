@@ -11,12 +11,6 @@ import UIKit
 class CatCell: UICollectionViewCell {
     var imageView = UIImageView()
     
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        contentView.clipsToBounds = true
-        clipsToBounds = true
-    }
-    
     override init(frame: CGRect) {
         super.init(frame: frame)
         layoutCell()
