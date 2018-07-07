@@ -23,8 +23,7 @@ class CatFeedLayout: UICollectionViewLayout {
         let floats = cache.map { (attribute) -> CGFloat in
             return attribute.frame.origin.y + attribute.frame.height
         }
-        if let max = floats.max() { return CGFloat(max) }
-        return 0
+        return floats.max() ?? 0
     }
     
     var columnWidth: CGFloat {

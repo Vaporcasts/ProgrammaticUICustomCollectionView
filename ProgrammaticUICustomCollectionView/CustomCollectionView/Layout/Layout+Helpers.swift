@@ -25,8 +25,7 @@ extension CatFeedLayout {
             }
             return 0
         }
-        if let max = floats.max() { return max }
-        else { return 0 }
+        return floats.max() ?? 0
     }
     
     /// Calculates the Y origin for a given item
