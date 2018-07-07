@@ -9,7 +9,7 @@
 import UIKit
 
 class CatCell: UICollectionViewCell {
-    var imageView: UIImageView?
+    var imageView = UIImageView()
     
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -19,7 +19,7 @@ class CatCell: UICollectionViewCell {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        layoutCell(with: frame)
+        layoutCell()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -28,23 +28,22 @@ class CatCell: UICollectionViewCell {
     
     override func prepareForReuse() {
         super.prepareForReuse()
-        self.imageView?.image = nil
+        self.imageView.image = nil
     }
     
     func setup(with cat: Cat) {
-        imageView?.setImageViewWithUrl(cat.imageUrl)
+        imageView.setImageViewWithUrl(cat.imageUrl)
     }
 }
 
 extension CatCell {
-    func layoutCell(with frame: CGRect) {
-        imageView = UIImageView()
-        imageView?.translatesAutoresizingMaskIntoConstraints = false
-        self.contentView.addSubview(imageView!)
-        imageView?.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
-        imageView?.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
-        imageView?.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
-        imageView?.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
-        imageView?.contentMode = .scaleAspectFit
+    func layoutCell() {
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        self.contentView.addSubview(imageView)
+        imageView.leftAnchor.constraint(equalTo: contentView.leftAnchor).isActive = true
+        imageView.topAnchor.constraint(equalTo: contentView.topAnchor).isActive = true
+        imageView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor).isActive = true
+        imageView.rightAnchor.constraint(equalTo: contentView.rightAnchor).isActive = true
+        imageView.contentMode = .scaleAspectFit
     }
 }

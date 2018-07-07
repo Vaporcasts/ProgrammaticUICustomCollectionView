@@ -8,14 +8,16 @@
 
 import UIKit
 protocol CatFeedDelegate {
-    func heightForCell(at indexpath: IndexPath) -> CGFloat
+    func heightForCell(at indexPath: IndexPath, in section: Int, forCollectionView collectionView: CatFeedCollectionView) -> CGFloat
 }
+
 class CatFeedLayout: UICollectionViewLayout {
     var cache = [UICollectionViewLayoutAttributes]()
     var delegate: CatFeedDelegate?
     
     let numberOfColumns = 2
-    fileprivate let padding: CGFloat = 15
+    let padding: CGFloat = 0
+    let headerHeight:  CGFloat = 30
     
     var totalHeight: CGFloat {
         let floats = cache.map { (attribute) -> CGFloat in
@@ -38,30 +40,40 @@ class CatFeedLayout: UICollectionViewLayout {
     }
     
     override func prepare() {
-        guard let collectionView = self.collectionView else { return }
+        guard let collectionView = self.collectionView as? CatFeedCollectionView else { return }
         var currentColumn = 0
-        for item in 0..<collectionView.numberOfItems(inSection: 0) {
-            let currentColumnFloat = CGFloat(currentColumn)
-            let indexPath = IndexPath(item: item, section: 0)
-            let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
-            
-            // Calculate Attributes
-            let xOrigin = columnWidth * (currentColumnFloat)
-            let height = self.delegate!.heightForCell(at: indexPath)
-            
-            var yOrigin = CGFloat()
-            if item < numberOfColumns { yOrigin = padding }
-            else if item >= numberOfColumns {
-                let cellAbove = cache[item - numberOfColumns]
-                yOrigin = cellAbove.frame.origin.y + cellAbove.frame.height + padding
+        for section in 0..<collectionView.numberOfSections {
+            let headerAttributes = createHeaderAttributes(for: section)
+            cache.append(headerAttributes)
+            for item in 0..<collectionView.numberOfItems(inSection: section) {
+                // reset the current column if we are in a new section
+                if item == 0 { currentColumn = 0 }
+                let currentColumnFloat = CGFloat(currentColumn)
+                
+                let indexPath = IndexPath(item: item, section: section)
+                let attributes = UICollectionViewLayoutAttributes(forCellWith: indexPath)
+                
+                // Calculate Attributes
+                let xOrigin = columnWidth * (currentColumnFloat)
+                guard let height = self.delegate?.heightForCell(at: indexPath, in: section, forCollectionView: collectionView) else { return }
+                let yOrigin = calculateYOrigin(for: item, inSection: section)
+                
+                attributes.frame = CGRect(x: xOrigin, y: yOrigin, width: columnWidth, height: height)
+                cache.append(attributes)
+                
+                if currentColumn < (numberOfColumns - 1) { currentColumn = currentColumn + 1}
+                else { currentColumn = 0}
             }
-            attributes.frame = CGRect(x: xOrigin, y: yOrigin, width: columnWidth, height: height)
-            cache.append(attributes)
-            
-            if currentColumn < (numberOfColumns - 1) { currentColumn = currentColumn + 1}
-            else { currentColumn = 0}
         }
-        for x in cache { print(x) }
+    }
+    
+    func createHeaderAttributes(for section: Int) ->  UICollectionViewLayoutAttributes {
+        let headerAttributes = UICollectionViewLayoutAttributes(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: IndexPath(item: 0, section: section))
+        if let collectionView = self.collectionView {
+            let frame = CGRect(x: 0, y: totalHeight, width: collectionView.frame.width, height: headerHeight)
+            headerAttributes.frame = frame
+        }
+        return headerAttributes
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {

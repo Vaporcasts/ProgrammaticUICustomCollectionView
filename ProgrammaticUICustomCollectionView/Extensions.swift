@@ -9,6 +9,7 @@
 import UIKit
 
 extension UIImageView {
+    
     func setImageViewWithUrl(_ urlString: String) {
         if let url = URL(string: urlString) {
             let session = URLSession(configuration: URLSessionConfiguration.default)
@@ -22,4 +23,5 @@ extension UIImageView {
             task.resume()
         }
     }
+    
 }
